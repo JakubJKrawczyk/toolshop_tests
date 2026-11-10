@@ -1,4 +1,5 @@
 ﻿package utilities.internal;
 
-public class Cart {
+public class Cart extends ModelBase{
+
 }

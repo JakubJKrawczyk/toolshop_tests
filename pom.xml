@@ -16,7 +16,7 @@
         <playwright.version>1.49.0</playwright.version>
         <junit.version>5.11.3</junit.version>
         <restassured.version>5.5.0</restassured.version>
-        <assertj.version>3.26.3</assertj.version>
+        <assertj.version>3.27.7</assertj.version>
         <surefire.version>3.5.2</surefire.version>
     </properties>
 
@@ -43,6 +43,12 @@
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
             <version>${assertj.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.18.2</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

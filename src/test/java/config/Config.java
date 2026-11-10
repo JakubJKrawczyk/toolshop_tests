@@ -1,7 +1,5 @@
 ﻿package config;
 
-
-
 public final class Config{
 
     public static final String TESTING_ENVIRONMENT_URL_APP =
