@@ -1,4 +1,4 @@
-﻿package config;
+package config;
 
 public final class Config{
 

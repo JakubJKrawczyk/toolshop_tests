@@ -1,4 +1,4 @@
-﻿package utilities.internal;
+package utilities.internal.models;
 
 public final class Brand extends ModelBase {
 
