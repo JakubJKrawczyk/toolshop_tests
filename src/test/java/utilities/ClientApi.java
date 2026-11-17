@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import core.JacksonHttpAnnotationIntrospector.HttpType;
 import core.JacksonHttpAnnotationIntrospector.HttpTypeIntrospector;
+import core.JacksonHttpAnnotationIntrospector.RequiredFields;
 
 import java.io.IOException;
 import java.net.URI;
@@ -84,6 +85,31 @@ public final class ClientApi {
         );
     }
 
+    public HttpResponse<String> put(String path, Object body){
+        var builder = newBuilder(path, Map.of());
+        HttpRequest.BodyPublisher publisher;
+
+        if(body == null){
+            publisher = HttpRequest.BodyPublishers.noBody();
+        }else{
+            publisher = HttpRequest.BodyPublishers.ofString(toJson(body));
+            builder.header("Content-Type", "application/json");
+        }
+
+        return execute(
+                builder.PUT(publisher).build(),
+                HttpResponse.BodyHandlers.ofString()
+        );
+    }
+
+    public HttpResponse<String> delete(String path, Map<String, String> query){
+        var builder =newBuilder(path, query);
+
+        return execute(
+                builder.DELETE().build(),
+                HttpResponse.BodyHandlers.ofString()
+        );
+    }
 
 
 
@@ -110,7 +136,8 @@ public final class ClientApi {
     }
 
     private String toJson(Object body) {
-        if (body instanceof String json) return json;   // pozwala podać surowy JSON
+        if (body instanceof String json) return json;
+        RequiredFields.validate(body, HttpType.Direction.REQUEST);
         try {
             return requestMapper.writeValueAsString(body);
         } catch (JsonProcessingException e) {

@@ -1,13 +1,10 @@
-package utilities.internal.models;
+package utilities.internal.models.category;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Category extends ModelBase{
+public class CategoryRequest extends ModelBase {
 
     public String name;
     public String slug;
     @JsonProperty("parent_id") public String parentId;
-
-
-
 }
